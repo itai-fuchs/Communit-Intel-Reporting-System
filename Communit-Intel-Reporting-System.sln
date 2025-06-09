@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36025.13 d17.14
+VisualStudioVersion = 17.14.36025.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Communit-Intel-Reporting-System", "Communit-Intel-Reporting-System\Communit-Intel-Reporting-System.csproj", "{C58C36D9-F87A-4A8D-8CE3-166BC939697B}"
 EndProject

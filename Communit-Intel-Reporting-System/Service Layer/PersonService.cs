@@ -1,5 +1,4 @@
-﻿
-using Community_Intel_Reporting_System.DAL;
+﻿using Community_Intel_Reporting_System.DAL;
 using System.Collections.Generic;
 
 namespace Community_Intel_Reporting_System.Service_LayerQL

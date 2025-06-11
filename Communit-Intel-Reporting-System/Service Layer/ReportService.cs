@@ -1,5 +1,4 @@
-﻿
-using Community_Intel_Reporting_System.models;
+﻿using Community_Intel_Reporting_System.models;
 using Community_Intel_Reporting_System.Service_LayerQL;
 using System;
 using System.Collections.Generic;
@@ -8,10 +7,6 @@ namespace Community_Intel_Reporting_System.Service_Layer
 {
     internal static class ReportService
     {
-       
-       
-
-
         public static void SubmitReport(int reporterId, string targetFirstName, string targetLastName, string targetSecretCode, string text)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -20,10 +15,8 @@ namespace Community_Intel_Reporting_System.Service_Layer
                 return;
             }
 
-
             Dictionary<string, object> target = PersonService.GetPersonByDetails(targetFirstName, targetLastName, targetSecretCode);
 
-   
             if (target == null)
             {
                 target = PersonService.AddPersonByDetails(targetFirstName, targetLastName, targetSecretCode);
@@ -31,30 +24,23 @@ namespace Community_Intel_Reporting_System.Service_Layer
 
             int targetId = Convert.ToInt32(target["id"]);
 
-         
             Report report = new Report(reporterId, targetId, text);
             DalReport.AddReport(report);
-
-           
+ 
             PersonService.IncrementCounters(reporterId, targetId);
 
             AlertService.CheckAndCreateAlertIfNeeded(targetId);
+
             int reporterReportCount = PersonService.GetReportCount(reporterId);
             if (reporterReportCount > 10)
             {
                 PersonService.UpdateUserType(reporterId, "agent");
-                Console.WriteLine($"Reporter with ID {reporterId} promoted to agent.");
             }
-
-
-
-
-
         }
 
         public static void DeleteReport(int id)
         {
-          DalReport.DeleteReport(id);
+            DalReport.DeleteReport(id);
         }
     }
 }

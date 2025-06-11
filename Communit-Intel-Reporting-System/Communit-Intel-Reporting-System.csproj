@@ -100,6 +100,7 @@
     <Compile Include="DAL\dalPerson.cs" />
     <Compile Include="DAL\dalReport.cs" />
     <Compile Include="DAL\DBconnection.cs" />
+    <Compile Include="logger.cs" />
     <Compile Include="SystemUI.cs" />
     <Compile Include="models\alert.cs" />
     <Compile Include="models\person.cs" />

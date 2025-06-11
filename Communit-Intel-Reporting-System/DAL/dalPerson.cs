@@ -1,5 +1,4 @@
-﻿
-using Community_Intel_Reporting_System.Service_LayerQL;
+﻿using Community_Intel_Reporting_System.Service_LayerQL;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ namespace Community_Intel_Reporting_System.DAL
 {
     internal static class DalPerson
     {
-        public  static void AddPerson(Person person)
+        public static void AddPerson(Person person)
         {
             try
             {
@@ -20,11 +19,11 @@ namespace Community_Intel_Reporting_System.DAL
                     DBConnection.ExecuteNonQuery(sql, conn);
                 }
 
-                Console.WriteLine("Person added successfully.");
+                Logger.Info("Person added successfully.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[ADD ERROR] {ex.Message}");
+                Logger.Error($"[ADD ERROR] {ex.Message}");
             }
         }
 
@@ -41,7 +40,7 @@ namespace Community_Intel_Reporting_System.DAL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[SELECT BY ID ERROR] {ex.Message}");
+                Logger.Error($"[SELECT BY ID ERROR] {ex.Message}");
                 return null;
             }
         }
@@ -63,7 +62,7 @@ namespace Community_Intel_Reporting_System.DAL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[DETAILS ERROR] {ex.Message}");
+                Logger.Error($"[DETAILS ERROR] {ex.Message}");
                 return null;
             }
         }
@@ -79,7 +78,7 @@ namespace Community_Intel_Reporting_System.DAL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[UPDATE ERROR] Failed to increment NumReports: {ex.Message}");
+                Logger.Error($"[UPDATE ERROR] Failed to increment NumReports: {ex.Message}");
             }
         }
 
@@ -95,7 +94,7 @@ namespace Community_Intel_Reporting_System.DAL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[UPDATE ERROR] Failed to increment NumMentions: {ex.Message}");
+                Logger.Error($"[UPDATE ERROR] Failed to increment NumMentions: {ex.Message}");
             }
         }
 
@@ -103,12 +102,11 @@ namespace Community_Intel_Reporting_System.DAL
 
         public static void UpdateUserType(int personId, string newType)
         {
-            
             var allowedTypes = new HashSet<string> { "user", "agent", "suspect" };
 
             if (!allowedTypes.Contains(newType.ToLower()))
             {
-                Console.WriteLine($"[UPDATE TYPE ERROR] Invalid user type: '{newType}'");
+                Logger.Error($"[UPDATE TYPE ERROR] Invalid user type: '{newType}'");
                 return;
             }
 
@@ -121,13 +119,14 @@ namespace Community_Intel_Reporting_System.DAL
                     DBConnection.Execute(sql, conn);
                 }
 
-                
+                Logger.Info($"User type for person with ID {personId} updated to '{newType}'.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[UPDATE TYPE ERROR] {ex.Message}");
+                Logger.Error($"[UPDATE TYPE ERROR] Failed to update user type: {ex.Message}");
             }
         }
+
 
 
         public static int GetReportCount(int personId)
@@ -157,7 +156,7 @@ namespace Community_Intel_Reporting_System.DAL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[SELECT ALL ERROR] {ex.Message}");
+                Logger.Error($"[SELECT ALL ERROR] {ex.Message}");
                 return new List<Dictionary<string, object>>();
             }
         }
@@ -171,11 +170,11 @@ namespace Community_Intel_Reporting_System.DAL
                     DBConnection.ExecuteNonQuery(sql, conn);
                 }
 
-                Console.WriteLine("Person deleted.");
+                Logger.Info("Person deleted.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[DELETE ERROR] {ex.Message}");
+                Logger.Error($"[DELETE ERROR] {ex.Message}");
             }
         }
 

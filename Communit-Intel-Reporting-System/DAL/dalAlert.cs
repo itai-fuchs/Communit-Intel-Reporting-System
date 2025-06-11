@@ -1,5 +1,4 @@
-﻿
-using Community_Intel_Reporting_System.models;
+﻿using Community_Intel_Reporting_System.models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -22,17 +21,19 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
 
                     
                     DBConnection.ExecuteNonQuery(sql, conn);
-                    
+                    Logger.Info($"New alert created for person with ID {alert.TargetId}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[ADD ERROR] Failed to add alert: {ex.Message}");
+                Logger.Error($"[ADD ERROR] Failed to add alert: {ex.Message}");
             }
+
+
         }
 
 
-        
+
         public static void EndAlert(int alertId, string closeReason)
         {
             try
@@ -46,18 +47,20 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
 
                     if (rowsAffected > 0)
                     {
-                        Console.WriteLine("Alert ended successfully.");
+                        Logger.Info("Alert ended successfully.");
                     }
                     else
                     {
-                        Console.WriteLine($"No alert found with ID {alertId}.");
+                        Logger.Info($"No alert found with ID {alertId}.");
                     }
+
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[END ALERT ERROR] Failed to end alert: {ex.Message}");
+                Logger.Error($"[END ALERT ERROR] Failed to end alert: {ex.Message}");
             }
+
         }
 
 

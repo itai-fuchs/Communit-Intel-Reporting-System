@@ -101,7 +101,6 @@ namespace Community_Intel_Reporting_System.UI
                 Console.WriteLine("3. View All Alerts");
                 Console.WriteLine("4. Close Alert");
                 Console.WriteLine("0. Logout");
-                Console.Write("Choice: ");
                 string input = Console.ReadLine();
 
                 switch (input)
@@ -180,7 +179,7 @@ namespace Community_Intel_Reporting_System.UI
             Console.Write("Enter Close Reason: ");
             string reason = Console.ReadLine();
 
-            AlertService.CloseAlert(alertId);
+            AlertService.CloseAlert(alertId,reason);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-using Community_Intel_Reporting_System.models;
+﻿using Community_Intel_Reporting_System.models;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -12,18 +11,18 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
         {
             try
             {
-                using (MySqlConnection conn = DBConnection.Connect()) 
+                using (MySqlConnection conn = DBConnection.Connect())
                 {
                     string sql = $"INSERT INTO reports (reporter_id, target_id, text, timestamp)" +
                         $" VALUES ({report.ReporterId}, {report.TargetId}, '{report.Text}', '{report.Timestamp:yyyy-MM-dd HH:mm:ss}')";
 
                     DBConnection.ExecuteNonQuery(sql, conn);
-                    Console.WriteLine("Report added successfully.");
+                    Logger.Info("Report added successfully.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[ADD ERROR] Failed to add report: {ex.Message}");
+                Logger.Error($"[ADD ERROR] Failed to add report: {ex.Message}");
             }
         }
 
@@ -39,7 +38,7 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[GET ERROR] Failed to retrieve reports: {ex.Message}");
+                Logger.Error($"[GET ERROR] Failed to retrieve reports: {ex.Message}");
                 return new List<Dictionary<string, object>>();
             }
         }
@@ -57,7 +56,7 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[GET ERROR] Failed to retrieve report by ID: {ex.Message}");
+                Logger.Error($"[GET ERROR] Failed to retrieve report by ID: {ex.Message}");
                 return null;
             }
         }
@@ -65,18 +64,17 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
         public static void DeleteReport(int id)
         {
             try
-
             {
                 using (MySqlConnection conn = DBConnection.Connect())
                 {
                     string sql = $"DELETE FROM reports WHERE id = {id}";
                     DBConnection.ExecuteNonQuery(sql, conn);
-                    Console.WriteLine("Report deleted successfully.");
+                    Logger.Info("Report deleted successfully.");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[DELETE ERROR] Failed to delete report: {ex.Message}");
+                Logger.Error($"[DELETE ERROR] Failed to delete report: {ex.Message}");
             }
         }
     }

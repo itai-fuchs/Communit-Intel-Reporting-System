@@ -7,10 +7,7 @@ namespace Community_Intel_Reporting_System.UI
 {
     internal class SystemUI
     {
-        private readonly PersonService personService = new PersonService();
-        private readonly ReportService reportService = new ReportService();
-        private readonly AlertService alertService = new AlertService();
-
+     
         public void Start()
         {
             while (true)
@@ -43,7 +40,7 @@ namespace Community_Intel_Reporting_System.UI
             Console.Write("Secret Code: ");
             string secretCode = Console.ReadLine();
 
-            var person = personService.AddPersonByDetails(firstName, lastName, secretCode);
+            var person = PersonService.AddPersonByDetails(firstName, lastName, secretCode);
 
             if (person == null)
             {
@@ -146,7 +143,7 @@ namespace Community_Intel_Reporting_System.UI
             Console.Write("Report Text: ");
             string text = Console.ReadLine();
 
-            reportService.SubmitReport(reporterId, first, last, code, text);
+            ReportService.SubmitReport(reporterId, first, last, code, text);
         }
 
         private void ViewAllReports()
@@ -183,7 +180,7 @@ namespace Community_Intel_Reporting_System.UI
             Console.Write("Enter Close Reason: ");
             string reason = Console.ReadLine();
 
-            alertService.CloseAlert(alertId);
+            AlertService.CloseAlert(alertId);
         }
     }
 }

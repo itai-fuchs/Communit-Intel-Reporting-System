@@ -6,14 +6,13 @@ using System.Collections.Generic;
 
 namespace Community_Intel_Reporting_System.Service_Layer
 {
-    internal class ReportService
+    internal static class ReportService
     {
        
-        private readonly PersonService personService = new PersonService();
-        private readonly AlertService alertService = new AlertService();
+       
 
 
-        public void SubmitReport(int reporterId, string targetFirstName, string targetLastName, string targetSecretCode, string text)
+        public static void SubmitReport(int reporterId, string targetFirstName, string targetLastName, string targetSecretCode, string text)
         {
             if (string.IsNullOrWhiteSpace(text))
             {
@@ -22,12 +21,12 @@ namespace Community_Intel_Reporting_System.Service_Layer
             }
 
 
-            Dictionary<string, object> target = personService.GetPersonByDetails(targetFirstName, targetLastName, targetSecretCode);
+            Dictionary<string, object> target = PersonService.GetPersonByDetails(targetFirstName, targetLastName, targetSecretCode);
 
    
             if (target == null)
             {
-                target = personService.AddPersonByDetails(targetFirstName, targetLastName, targetSecretCode);
+                target = PersonService.AddPersonByDetails(targetFirstName, targetLastName, targetSecretCode);
             }
 
             int targetId = Convert.ToInt32(target["id"]);
@@ -37,13 +36,13 @@ namespace Community_Intel_Reporting_System.Service_Layer
             DalReport.AddReport(report);
 
            
-            personService.IncrementCounters(reporterId, targetId);
+            PersonService.IncrementCounters(reporterId, targetId);
 
-            alertService.CheckAndCreateAlertIfNeeded(targetId);
-            int reporterReportCount = personService.GetReportCount(reporterId);
+            AlertService.CheckAndCreateAlertIfNeeded(targetId);
+            int reporterReportCount = PersonService.GetReportCount(reporterId);
             if (reporterReportCount > 10)
             {
-                personService.UpdateUserType(reporterId, "agent");
+                PersonService.UpdateUserType(reporterId, "agent");
                 Console.WriteLine($"Reporter with ID {reporterId} promoted to agent.");
             }
 
@@ -56,7 +55,7 @@ namespace Community_Intel_Reporting_System.Service_Layer
 
        
 
-        public void DeleteReport(int id)
+        public static void DeleteReport(int id)
         {
           DalReport.DeleteReport(id);
         }

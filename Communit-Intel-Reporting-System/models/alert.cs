@@ -4,26 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Communit_Intel_Reporting_System.models
+namespace Community_Intel_Reporting_System.models
 {
     public class Alert
     {
         public int Id { get; set; }
         public int TargetId { get; set; }
-        public DateTime StartTime { get; set; }
+        public DateTime StartTime { get; private set; }
         public string AlertReason { get; set; }
-        public bool IsActive { get; set; }
+        public int IsActive { get; set; }
 
-        public DateTime? EndTime { get; set; }
+        public DateTime EndTime { get; set; }
         public string CloseReason { get; set; }
 
 
-        public Alert(int targetId, DateTime startTime, string alertreason)
+        public Alert(int targetId)
         {
             TargetId = targetId;
-            StartTime = startTime;
-            AlertReason = alertreason;
-            IsActive = true;
+            IsActive = 1;
+            StartTime = DateTime.Now;
         }
     }
 

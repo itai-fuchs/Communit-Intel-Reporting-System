@@ -1,16 +1,14 @@
 ﻿
 using Community_Intel_Reporting_System.DAL;
-using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
 
 namespace Community_Intel_Reporting_System.Service_LayerQL
 {
 
-    internal class PersonService
+    internal static class PersonService
     {
        
-        public Dictionary<string, object> AddPersonByDetails(string firstName, string lastName, string secretCode)
+        public static Dictionary<string, object> AddPersonByDetails(string firstName, string lastName, string secretCode)
         {
             
 
@@ -20,35 +18,35 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
             return DalPerson.GetPersonByDetails(firstName, lastName, secretCode);
         }
 
-        public void AddPerson(Person person)
+        public static void AddPerson(Person person)
         {
             DalPerson.AddPerson(person);
         }
 
 
-        public Dictionary<string, object> GetPersonById(int id)
+        public static Dictionary<string, object> GetPersonById(int id)
         {
             return DalPerson.GetPersonById(id);
         }
 
    
-        public Dictionary<string, object> GetPersonByDetails(string firstName, string lastName, string secretCode)
+        public static Dictionary<string, object> GetPersonByDetails(string firstName, string lastName, string secretCode)
         {
             return DalPerson.GetPersonByDetails(firstName, lastName, secretCode);
         }
-        public void IncrementCounters(int reporterId, int targetId)
+        public static void IncrementCounters(int reporterId, int targetId)
         {
             DalPerson.IncrementNumReports(reporterId);
             DalPerson.IncrementNumMentions(targetId);
         }
 
 
-        public void UpdateUserType(int personId, string newType)
+        public static void UpdateUserType(int personId, string newType)
         {
             DalPerson.UpdateUserType(personId, newType);
         }
 
-        public int GetReportCount(int personId)
+        public static int GetReportCount(int personId)
         {
            return DalPerson.GetReportCount(personId);
         }
@@ -56,11 +54,11 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
 
 
 
-        public void getAllPersons()
+        public static void getAllPersons()
         {
             DalPerson.GetAllPersons();
         }
-        public void DeletePerson(int personID)
+        public static void DeletePerson(int personID)
         {
             DalPerson.DeletePerson(personID);
         }

@@ -16,7 +16,7 @@ namespace Community_Intel_Reporting_System.Service_Layer
 
             int mentions = Convert.ToInt32(person["num_mentions"]);
 
-            if (mentions >= 20)
+            if (mentions >=20)
             {
                 Alert alert = new Alert(targetId)
                 {
@@ -25,6 +25,7 @@ namespace Community_Intel_Reporting_System.Service_Layer
                 };
 
                 DalAlert.AddAlert(alert);
+                Console.WriteLine($"alert for  target {targetId} {alert.AlertReason}");
                
                 PersonService.UpdateUserType(targetId, "suspect");
             }

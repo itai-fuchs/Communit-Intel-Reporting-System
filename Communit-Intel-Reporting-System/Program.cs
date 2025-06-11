@@ -9,22 +9,9 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
     {
         static void Main(string[] args)
         {
-            
-           
-
-         
-           
-
+        
             SystemUI systemUI = new SystemUI();
             systemUI.Start();
-
-
-
-
-
-
-
-
 
         }
     }

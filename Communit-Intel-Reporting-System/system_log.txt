@@ -1,4 +1,58 @@
-[2025-06-11 16:39:55] [ERROR] [ADD ERROR] Duplicate entry 'f' for key 'secret_code'
-[2025-06-11 16:44:05] [INFO] Person added successfully.
-[2025-06-11 16:44:09] [INFO] Person added successfully.
-[2025-06-11 16:44:09] [INFO] Report added successfully.
+[2025-06-11 17:15:21] [INFO] Person added successfully.
+[2025-06-11 17:15:43] [INFO] Person added successfully.
+[2025-06-11 17:15:43] [INFO] Report added successfully.
+[2025-06-11 17:15:43] [INFO] New alert created for person with ID 25
+[2025-06-11 17:15:43] [ERROR] [UPDATE TYPE ERROR] Failed to update user type: Unknown column 'user_type' in 'field list'
+[2025-06-11 17:16:08] [INFO] Report added successfully.
+[2025-06-11 17:16:08] [INFO] New alert created for person with ID 24
+[2025-06-11 17:16:08] [ERROR] [UPDATE TYPE ERROR] Failed to update user type: Unknown column 'user_type' in 'field list'
+[2025-06-11 17:16:08] [ERROR] [UPDATE TYPE ERROR] Failed to update user type: Unknown column 'user_type' in 'field list'
+[2025-06-11 17:16:22] [ERROR] [ADD ERROR] Duplicate entry 'metargel' for key 'secret_code'
+[2025-06-11 17:19:43] [INFO] Person added successfully.
+[2025-06-11 17:20:25] [ERROR] [ADD ERROR] Duplicate entry 'metargel' for key 'secret_code'
+[2025-06-11 17:20:45] [INFO] Person added successfully.
+[2025-06-11 17:20:45] [INFO] Report added successfully.
+[2025-06-11 17:20:45] [INFO] New alert created for person with ID 29
+[2025-06-11 17:20:45] [ERROR] [UPDATE TYPE ERROR] Failed to update user type: Unknown column 'user_type' in 'field list'
+[2025-06-11 17:20:45] [ERROR] [UPDATE TYPE ERROR] Failed to update user type: Unknown column 'user_type' in 'field list'
+[2025-06-11 17:21:14] [ERROR] [ADD ERROR] Duplicate entry 'metargel' for key 'secret_code'
+[2025-06-11 17:26:07] [ERROR] [ADD ERROR] Duplicate entry 'metargel' for key 'secret_code'
+[2025-06-11 17:26:14] [INFO] Person added successfully.
+[2025-06-11 17:26:14] [INFO] Report added successfully.
+[2025-06-11 17:26:14] [INFO] New alert created for person with ID 32
+[2025-06-11 17:26:14] [ERROR] [UPDATE TYPE ERROR] Failed to update user type: Unknown column 'user_type' in 'field list'
+[2025-06-11 17:26:14] [ERROR] [UPDATE TYPE ERROR] Failed to update user type: Unknown column 'user_type' in 'field list'
+[2025-06-11 17:27:44] [ERROR] [ADD ERROR] Duplicate entry 'metargel' for key 'secret_code'
+[2025-06-11 17:27:49] [INFO] Person added successfully.
+[2025-06-11 17:27:49] [INFO] Report added successfully.
+[2025-06-11 17:27:49] [INFO] New alert created for person with ID 34
+[2025-06-11 17:27:49] [ERROR] [UPDATE TYPE ERROR] Failed to update user type: Unknown column 'user_type' in 'field list'
+[2025-06-11 17:27:49] [ERROR] [UPDATE TYPE ERROR] Failed to update user type: Unknown column 'user_type' in 'field list'
+[2025-06-11 17:30:19] [ERROR] [ADD ERROR] Duplicate entry 'metargel' for key 'secret_code'
+[2025-06-11 17:30:24] [INFO] Person added successfully.
+[2025-06-11 17:30:24] [INFO] Report added successfully.
+[2025-06-11 17:30:24] [INFO] New alert created for person with ID 36
+[2025-06-11 17:30:24] [INFO] User type for person with ID 36 updated to 'suspect'.
+[2025-06-11 17:30:24] [INFO] User type for person with ID 24 updated to 'agent'.
+[2025-06-11 17:30:49] [ERROR] [ADD ERROR] Duplicate entry 'metargel' for key 'secret_code'
+[2025-06-11 17:31:12] [INFO] Alert ended successfully.
+[2025-06-11 17:31:57] [INFO] Person added successfully.
+[2025-06-11 17:32:11] [INFO] Person added successfully.
+[2025-06-11 17:32:11] [INFO] Report added successfully.
+[2025-06-11 17:32:11] [INFO] New alert created for person with ID 39
+[2025-06-11 17:32:11] [INFO] User type for person with ID 39 updated to 'suspect'.
+[2025-06-11 17:32:56] [ERROR] [ADD ERROR] Duplicate entry 'c' for key 'secret_code'
+[2025-06-11 17:33:07] [ERROR] [ADD ERROR] Duplicate entry 'metargel' for key 'secret_code'
+[2025-06-11 17:33:27] [INFO] Person added successfully.
+[2025-06-11 17:33:27] [INFO] Report added successfully.
+[2025-06-11 17:33:27] [INFO] New alert created for person with ID 42
+[2025-06-11 17:33:27] [INFO] User type for person with ID 42 updated to 'suspect'.
+[2025-06-11 17:33:27] [INFO] User type for person with ID 24 updated to 'agent'.
+[2025-06-11 21:47:37] [INFO] Person added successfully.
+[2025-06-11 21:48:31] [INFO] Person added successfully.
+[2025-06-11 21:48:31] [INFO] Report added successfully.
+[2025-06-11 21:50:27] [ERROR] [ADD ERROR] Duplicate entry '22' for key 'secret_code'
+[2025-06-11 21:50:47] [ERROR] [ADD ERROR] Duplicate entry '11' for key 'secret_code'
+[2025-06-11 21:51:10] [INFO] Report added successfully.
+[2025-06-11 21:51:10] [INFO] New alert created for person with ID 2
+[2025-06-11 21:51:10] [INFO] User type for person with ID 2 updated to 'suspect'.

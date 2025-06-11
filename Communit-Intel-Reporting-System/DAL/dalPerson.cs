@@ -103,7 +103,7 @@ namespace Community_Intel_Reporting_System.DAL
         public static void UpdateUserType(int personId, string newType)
         {
             var allowedTypes = new HashSet<string> { "user", "agent", "suspect" };
-
+            
             if (!allowedTypes.Contains(newType.ToLower()))
             {
                 Logger.Error($"[UPDATE TYPE ERROR] Invalid user type: '{newType}'");
@@ -112,7 +112,7 @@ namespace Community_Intel_Reporting_System.DAL
 
             try
             {
-                string sql = $"UPDATE persons SET user_type = '{newType}' WHERE id = {personId}";
+                string sql = $"UPDATE persons SET type = '{newType}' WHERE id = {personId}";
 
                 using (var conn = DBConnection.Connect())
                 {

@@ -52,9 +52,6 @@ namespace Community_Intel_Reporting_System.Service_Layer
 
         }
 
-
-       
-
         public static void DeleteReport(int id)
         {
           DalReport.DeleteReport(id);

@@ -54,7 +54,7 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
 
 
 
-        public static void getAllPersons()
+        public static void GetAllPersons()
         {
             DalPerson.GetAllPersons();
         }

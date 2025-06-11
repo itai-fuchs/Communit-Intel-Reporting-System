@@ -8,6 +8,9 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
 {
     internal static class DalAlert
     {
+
+
+        // add new alert to table
         public static void AddAlert(Alert alert)
         {
             try
@@ -17,6 +20,7 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
                     string sql = $"INSERT INTO alerts (target_id,start_time,alert_reason,is_active,end_time,close_reason )" +
                         $" VALUES ('{alert.TargetId}', '{alert.StartTime:yyyy-MM-dd HH:mm:ss}', '{alert.AlertReason}', '{alert.IsActive}', '{alert.EndTime:yyyy-MM-dd HH:mm:ss}','{alert.CloseReason}')";
 
+                    
                     DBConnection.ExecuteNonQuery(sql, conn);
                     
                 }
@@ -27,6 +31,8 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
             }
         }
 
+
+        
         public static void EndAlert(int alertId, string closeReason)
         {
             try

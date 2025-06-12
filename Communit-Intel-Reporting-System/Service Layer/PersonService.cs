@@ -6,16 +6,23 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
 
     internal static class PersonService
     {
-       
-        public static Dictionary<string, object> AddPersonByDetails(string firstName, string lastName, string secretCode)
-        {
-            
 
-            Person newPerson = new Person(firstName, lastName, secretCode);
-            DalPerson.AddPerson(newPerson);
-          
-            return DalPerson.GetPersonByDetails(firstName, lastName, secretCode);
+        public static void AddPersonByDetails(string firstName, string lastName, string secretCode)
+        {
+            Person newPerson = new Person
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                SecretCode = secretCode,
+                type = "user",
+                NumReports = 0,
+                NumMentions = 0
+            };
+
+                AddPerson(newPerson);
+ 
         }
+
 
         public static void AddPerson(Person person)
         {
@@ -23,16 +30,21 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
         }
 
 
-        public static Dictionary<string, object> GetPersonById(int id)
+        public static Person GetPersonById(int id)
         {
             return DalPerson.GetPersonById(id);
         }
 
-   
-        public static Dictionary<string, object> GetPersonByDetails(string firstName, string lastName, string secretCode)
+        public static Person GetPersonBySecretCode(string secretCode)
+        {
+            return DalPerson.GetPersonBySecretCode(secretCode);
+        }
+        public static Person GetPersonByDetails(string firstName, string lastName, string secretCode)
         {
             return DalPerson.GetPersonByDetails(firstName, lastName, secretCode);
         }
+
+
         public static void IncrementCounters(int reporterId, int targetId)
         {
             DalPerson.IncrementNumReports(reporterId);
@@ -45,18 +57,19 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
             DalPerson.UpdateUserType(personId, newType);
         }
 
+
         public static int GetReportCount(int personId)
         {
-           return DalPerson.GetReportCount(personId);
+           return DalPerson.GetReportsCount(personId);
         }
 
 
 
-
-        public static void GetAllPersons()
+        public static List<Person> GetAllPersons()
         {
-            DalPerson.GetAllPersons();
+            return DalPerson.GetAllPersons();
         }
+
         public static void DeletePerson(int personID)
         {
             DalPerson.DeletePerson(personID);

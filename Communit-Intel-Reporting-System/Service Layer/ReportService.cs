@@ -1,5 +1,6 @@
 ﻿using Community_Intel_Reporting_System.models;
 using Community_Intel_Reporting_System.Service_LayerQL;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 
@@ -8,48 +9,62 @@ namespace Community_Intel_Reporting_System.Service_Layer
     internal static class ReportService
     {
 
-        
-        public static void SubmitReport(int reporterId, string targetFirstName, string targetLastName, string targetSecretCode, string text)
+
+        public static void SubmitReport(int reporterId, int targetId, string text)
         {
-            //check if enter text
             if (string.IsNullOrWhiteSpace(text))
             {
-                Console.WriteLine("Cannot submit empty report.");
-                return;
+                
+                throw new ArgumentException("Cannot submit empty report.");
             }
 
-            // get or create target
-            Dictionary<string, object> target = PersonService.GetPersonByDetails(targetFirstName, targetLastName, targetSecretCode);
-
-            if (target == null)
+            Report report = new Report()
             {
-                target = PersonService.AddPersonByDetails(targetFirstName, targetLastName, targetSecretCode);
-            }
+                ReporterId = reporterId,
+                TargetId = targetId,
+                Text = text
+            };
 
-            int targetId = Convert.ToInt32(target["id"]);
-            //add report
-            Report report = new Report(reporterId, targetId, text);
             DalReport.AddReport(report);
- 
-            //increment mention and nreport
+
             PersonService.IncrementCounters(reporterId, targetId);
 
-            //create alert if need
-            AlertService.CheckAndCreateAlertIfNeeded(targetId);
+            AlertService.CheckAndCreateAlertIfNeed(targetId);
 
             int reporterReportCount = PersonService.GetReportCount(reporterId);
-           
-            // change reporte type if need
+
             if (reporterReportCount > 10)
             {
                 PersonService.UpdateUserType(reporterId, "agent");
-                
             }
         }
+
 
         public static void DeleteReport(int id)
         {
             DalReport.DeleteReport(id);
+        }
+
+
+        public static int GetRecentReportsCount(int targetId, TimeSpan timeSpan)
+        {
+            try
+            {
+                using (var conn = DBConnection.Connect())
+                {
+                    string sql = $"SELECT COUNT(*) FROM reports WHERE target_id = {targetId} AND timestamp >= DATE_SUB(NOW(), INTERVAL {timeSpan.TotalMinutes} MINUTE)";
+
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        return Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"[GetRecentReportsCount ERROR] {ex.Message}");
+                return 0;
+            }
         }
     }
 }

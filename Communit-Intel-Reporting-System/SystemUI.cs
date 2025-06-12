@@ -1,55 +1,87 @@
 ﻿using Community_Intel_Reporting_System.Service_Layer;
 using Community_Intel_Reporting_System.Service_LayerQL;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 
 namespace Community_Intel_Reporting_System.UI
 {
     internal class SystemUI
     {
-     
+
         public void Start()
         {
             while (true)
             {
-                Console.WriteLine("\n--- Welcome to the System ---");
+                Console.WriteLine("\n--- Welcome to the  MALSHINON System ---");
                 Console.WriteLine("1. Login");
+                Console.WriteLine("2. register");
                 Console.WriteLine("0. Exit");
                 string input = Console.ReadLine();
 
-                if (input == "1")
-                    Login();
-                else if (input == "0")
+                switch (input)
                 {
-                    Console.WriteLine("Goodbye!");
-                    break;
+                    case "1":
+                        Login();
+                        break;
+
+                    case "2":
+                        register();
+                        break;
+
+                    case "0":
+                        Console.WriteLine("Goodbye!");
+                       return;
+                        
+
+                    default:
+                        Console.WriteLine("Invalid input.");
+                        break;
                 }
-                else
-                    Console.WriteLine("Invalid input.");
+
             }
         }
 
+
+        private void register()
+        {
+            Console.WriteLine("first name: ");
+            string firstName = Console.ReadLine();
+            Console.WriteLine("last name: ");
+            string lastName = Console.ReadLine();
+            Console.WriteLine("secret code: ");
+            string secretCode = Console.ReadLine();
+
+            var existingPerson = PersonService.GetPersonByDetails(firstName, lastName, secretCode);
+            if (existingPerson != null)
+            {
+                Console.WriteLine("This person already exists in the system.");
+                return;  
+            }
+
+            PersonService.AddPersonByDetails(firstName, lastName, secretCode);
+            Console.WriteLine("Registration successful.");
+        }
+
+
         private void Login()
         {
-            Console.Write("First Name: ");
-            string firstName = Console.ReadLine();
-
-            Console.Write("Last Name: ");
-            string lastName = Console.ReadLine();
 
             Console.Write("Secret Code: ");
             string secretCode = Console.ReadLine();
 
-            var person = PersonService.AddPersonByDetails(firstName, lastName, secretCode);
+            var person = PersonService.GetPersonBySecretCode(secretCode);
 
             if (person == null)
             {
-                Console.WriteLine("Login failed.");
+                Console.WriteLine("need to register first");
                 return;
             }
 
-            string userType = person["type"].ToString().ToLower();
-            int userId = Convert.ToInt32(person["id"]);
+            string userType = person.type.ToString().ToLower();
+            int userId = Convert.ToInt32(person.Id);
 
             switch (userType)
             {
@@ -74,8 +106,7 @@ namespace Community_Intel_Reporting_System.UI
             {
                 Console.WriteLine("\n--- User Menu ---");
                 Console.WriteLine("1. Submit Report");
-                Console.WriteLine("0. Logout");
-                Console.Write("Choice: ");
+                Console.WriteLine("0. Logout");       
                 string input = Console.ReadLine();
 
                 if (input == "1")
@@ -127,22 +158,45 @@ namespace Community_Intel_Reporting_System.UI
             }
         }
 
-      
+
         private void UISubmitReport(int reporterId)
         {
-            Console.Write("Target First Name: ");
-            string first = Console.ReadLine();
+            Console.Write("Target secretCode: ");
+            string targetSecretCode = Console.ReadLine();
 
-            Console.Write("Target Last Name: ");
-            string last = Console.ReadLine();
+            var target = PersonService.GetPersonBySecretCode(targetSecretCode);
 
-            Console.Write("Target Secret Code: ");
-            string code = Console.ReadLine();
+            if (target == null)
+            {
+                Console.WriteLine("Target not found. Please enter target details.");
+
+                Console.Write("Target first Name: ");
+                string firstName = Console.ReadLine();
+
+                Console.Write("Target last Name: ");
+                string lastName = Console.ReadLine();
+
+                PersonService.AddPersonByDetails(firstName, lastName, targetSecretCode);
+
+               Logger.Info("[INFO]New target added");
+
+               
+                target = PersonService.GetPersonBySecretCode(targetSecretCode);
+            }
 
             Console.Write("Report Text: ");
             string text = Console.ReadLine();
 
-            ReportService.SubmitReport(reporterId, first, last, code, text);
+            try
+            {
+                ReportService.SubmitReport(reporterId, Convert.ToInt32(target.Id), text);
+                Console.WriteLine("Report submitted successfully.");
+                Logger.Info("[INFO]Report submitted successfully.");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void ViewAllReports()
@@ -151,7 +205,7 @@ namespace Community_Intel_Reporting_System.UI
             Console.WriteLine("\n--- Reports ---");
             foreach (var r in reports)
             {
-                Console.WriteLine($"ID: {r["id"]}, Reporter: {r["reporter_id"]}, Target: {r["target_id"]}, Text: {r["text"]}");
+                Console.WriteLine($"ID: {r.Id}, Reporter: {r.ReporterId}, Target: {r.TargetId}, Text: {r.Text}");
             }
         }
 
@@ -162,7 +216,7 @@ namespace Community_Intel_Reporting_System.UI
             Console.WriteLine("\n--- Alerts ---");
             foreach (var a in alerts)
             {
-                Console.WriteLine($"ID: {a["id"]}, Target: {a["target_id"]}, Reason: {a["alert_reason"]}, Active: {a["is_active"]}");
+                Console.WriteLine($"ID: {a.Id}, Target: {a.TargetId}, Reason: {a.AlertReason}, Active: {a.IsActive}");
             }
         }
 

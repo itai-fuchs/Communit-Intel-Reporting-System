@@ -56,3 +56,9 @@
 [2025-06-11 21:51:10] [INFO] Report added successfully.
 [2025-06-11 21:51:10] [INFO] New alert created for person with ID 2
 [2025-06-11 21:51:10] [INFO] User type for person with ID 2 updated to 'suspect'.
+[2025-06-12 15:23:58] [INFO] Person added successfully.
+[2025-06-12 15:24:58] [INFO] Person added successfully.
+[2025-06-12 15:34:09] [INFO] Person added successfully.
+[2025-06-12 15:34:09] [INFO] [INFO]New target added
+[2025-06-12 15:34:17] [INFO] Report added successfully.
+[2025-06-12 15:34:17] [INFO] [INFO]Report submitted successfully.

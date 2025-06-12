@@ -26,24 +26,8 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
             }
         }
 
-        public static List<Dictionary<string, object>> GetAllReports()
-        {
-            try
-            {
-                using (MySqlConnection conn = DBConnection.Connect())
-                {
-                    string sql = "SELECT * FROM reports";
-                    return DBConnection.Execute(sql, conn);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Error($"[GET ERROR] Failed to retrieve reports: {ex.Message}");
-                return new List<Dictionary<string, object>>();
-            }
-        }
 
-        public static Dictionary<string, object> GetReportById(int id)
+        public static Report GetReportById(int id)
         {
             try
             {
@@ -51,7 +35,22 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
                 {
                     string sql = $"SELECT * FROM reports WHERE id = {id}";
                     var rows = DBConnection.Execute(sql, conn);
-                    return rows.Count > 0 ? rows[0] : null;
+
+                    if (rows.Count > 0)
+                    {
+                        var row = rows[0];
+                        return new Report
+                        {
+                            Id = Convert.ToInt32(row["id"]),
+                            ReporterId = Convert.ToInt32(row["reporter_id"]),
+                            TargetId = Convert.ToInt32(row["target_id"]),
+                            Text = Convert.ToString(row["text"]),
+                        };
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
             catch (Exception ex)
@@ -60,6 +59,45 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
                 return null;
             }
         }
+
+
+        public static List<Report> GetAllReports()
+        {
+            List<Report> reports = new List<Report>();
+
+            try
+            {
+                using (MySqlConnection conn = DBConnection.Connect())
+                {
+                    string sql = "SELECT * FROM reports";
+                    var rows = DBConnection.Execute(sql, conn);
+
+                    foreach (var row in rows)
+                    {
+                        Report report = new Report
+                        {
+                            Id = Convert.ToInt32(row["id"]),
+                            ReporterId = Convert.ToInt32(row["reporter_id"]),
+                            TargetId = Convert.ToInt32(row["target_id"]),
+                            Text = row["text"].ToString(),
+                          
+                        };
+
+                        reports.Add(report);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"[GET ERROR] Failed to retrieve reports: {ex.Message}");
+            }
+
+            return reports;
+        }
+
+
+     
+
 
         public static void DeleteReport(int id)
         {

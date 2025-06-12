@@ -27,7 +27,7 @@ namespace Community_Intel_Reporting_System.DAL
             }
         }
 
-        public static Dictionary<string, object> GetPersonById(int id)
+        public static Person GetPersonById(int id)
         {
             try
             {
@@ -35,7 +35,22 @@ namespace Community_Intel_Reporting_System.DAL
                 {
                     string sql = $"SELECT * FROM persons WHERE id = {id}";
                     var rows = DBConnection.Execute(sql, conn);
-                    return rows.Count > 0 ? rows[0] : null;
+
+                    if (rows.Count == 0)
+                        return null;
+
+                    var row = rows[0];
+
+                    return new Person
+                    {
+                        Id = Convert.ToInt32(row["id"]),
+                        FirstName = row["first_name"].ToString(),
+                        LastName = row["last_name"].ToString(),
+                        SecretCode = row["secret_code"].ToString(),
+                        type = row["type"].ToString(),
+                        NumReports = Convert.ToInt32(row["num_reports"]),
+                        NumMentions = Convert.ToInt32(row["num_mentions"])
+                    };
                 }
             }
             catch (Exception ex)
@@ -45,19 +60,104 @@ namespace Community_Intel_Reporting_System.DAL
             }
         }
 
-        public static Dictionary<string, object> GetPersonByDetails(string firstName, string lastName, string secretCode)
+        public static List<Person> GetAllPersons()
+        {
+            var persons = new List<Person>();
+
+            try
+            {
+                using (MySqlConnection conn = DBConnection.Connect())
+                {
+                    string sql = "SELECT * FROM persons";
+                    var rows = DBConnection.Execute(sql, conn);
+
+                    foreach (var row in rows)
+                    {
+                        var person = new Person
+                        {
+                            Id = Convert.ToInt32(row["id"]),
+                            FirstName = row["first_name"].ToString(),
+                            LastName = row["last_name"].ToString(),
+                            SecretCode = row["secret_code"].ToString(),
+                            type = row["type"].ToString(),
+                            NumReports = Convert.ToInt32(row["num_reports"]),
+                            NumMentions = Convert.ToInt32(row["num_mentions"])
+                        };
+
+                        persons.Add(person);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"[SELECT ALL ERROR] {ex.Message}");
+            }
+
+            return persons;
+        }
+
+        public static Person GetPersonBySecretCode(string secretCode)
+        {
+            try
+            {
+                using (MySqlConnection conn = DBConnection.Connect())
+                {
+                    string sql = $"SELECT * FROM persons WHERE secret_code = '{secretCode}'";
+                    var rows = DBConnection.Execute(sql, conn);
+
+                    if (rows.Count == 0)
+                        return null;
+
+                    var row = rows[0];
+                    return new Person()
+                    {
+                        Id = Convert.ToInt32(row["id"]),
+                        FirstName = row["first_name"].ToString(),
+                        LastName = row["last_name"].ToString(),
+                        SecretCode = row["secret_code"].ToString(),
+                        type = row["type"].ToString(),
+                        NumReports = Convert.ToInt32(row["num_reports"]),
+                        NumMentions = Convert.ToInt32(row["num_mentions"])
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error($"[SELECT BY SecretCode ERROR] {ex.Message}");
+                return null;
+            }
+        }
+
+
+
+        public static Person GetPersonByDetails(string firstName, string lastName, string secretCode)
         {
             try
             {
                 using (MySqlConnection conn = DBConnection.Connect())
                 {
                     string sql = $"SELECT * FROM persons " +
-                        $" WHERE first_name = '{firstName}' " +
-                        $"AND last_name = '{lastName}' " +
-                        $" AND secret_code = '{secretCode}'";
+                                 $"WHERE first_name = '{firstName}' " +
+                                 $"AND last_name = '{lastName}' " +
+                                 $"AND secret_code = '{secretCode}'";
 
                     var rows = DBConnection.Execute(sql, conn);
-                    return rows.Count > 0 ? rows[0] : null;
+
+                    if (rows.Count == 0)
+                        return null;
+
+                    var row = rows[0];
+
+                    return new Person
+                    {
+                        Id = Convert.ToInt32(row["id"]),
+                        FirstName = row["first_name"].ToString(),
+                        LastName = row["last_name"].ToString(),
+                        SecretCode = row["secret_code"].ToString(),
+                        type = row["type"].ToString(),
+                        NumReports = Convert.ToInt32(row["num_reports"]),
+                        NumMentions = Convert.ToInt32(row["num_mentions"])
+                    };
                 }
             }
             catch (Exception ex)
@@ -66,6 +166,7 @@ namespace Community_Intel_Reporting_System.DAL
                 return null;
             }
         }
+
         public static void IncrementNumReports(int personId)
         {
             try
@@ -129,7 +230,7 @@ namespace Community_Intel_Reporting_System.DAL
 
 
 
-        public static int GetReportCount(int personId)
+        public static int GetReportsCount(int personId)
         {
             string sql = $"SELECT COUNT(*) FROM reports WHERE reporter_id = {personId}";
 
@@ -144,22 +245,7 @@ namespace Community_Intel_Reporting_System.DAL
 
 
 
-        public static List<Dictionary<string, object>> GetAllPersons()
-        {
-            try
-            {
-                using (MySqlConnection conn = DBConnection.Connect())
-                {
-                    string sql = "SELECT * FROM persons";
-                    return DBConnection.Execute(sql, conn);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Error($"[SELECT ALL ERROR] {ex.Message}");
-                return new List<Dictionary<string, object>>();
-            }
-        }
+       
         public static void DeletePerson(int id)
         {
             try

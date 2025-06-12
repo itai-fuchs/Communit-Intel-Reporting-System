@@ -100,6 +100,7 @@
     <Compile Include="DAL\dalPerson.cs" />
     <Compile Include="DAL\dalReport.cs" />
     <Compile Include="DAL\DBconnection.cs" />
+    <Compile Include="ImportCSV.cs" />
     <Compile Include="logger.cs" />
     <Compile Include="SystemUI.cs" />
     <Compile Include="models\alert.cs" />
@@ -114,6 +115,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="sample_import.csv" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="schema.sql" />

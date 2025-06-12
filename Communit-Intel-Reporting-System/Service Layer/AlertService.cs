@@ -1,44 +1,49 @@
 ﻿using Community_Intel_Reporting_System.models;
 using Community_Intel_Reporting_System.Service_LayerQL;
+using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 
 namespace Community_Intel_Reporting_System.Service_Layer
 {
     internal static class AlertService
     {
-        public static void CheckAndCreateAlertIfNeeded(int targetId)
+        public static void CheckAndCreateAlertIfNeed(int targetId)
         {
-            var person = PersonService.GetPersonById(targetId);
+            Person person = PersonService.GetPersonById(targetId);
             if (person == null)
-            { 
                 return;
-            }
 
-            int mentions = Convert.ToInt32(person["num_mentions"]);
-
-            if (mentions >=20)
+            int mentions = person.NumMentions;
+            int recentReports = ReportService.GetRecentReportsCount(targetId, TimeSpan.FromMinutes(15));
+            if (mentions >= 20 || recentReports >= 3)
             {
-                Alert alert = new Alert(targetId)
+                Alert alert = new Alert()
                 {
-                    AlertReason = $"Mentioned {mentions} times",
+                    TargetId = targetId,
+                    AlertReason = $"Mentioned {mentions} times, {recentReports} reports in last 15 minutes",
                     CloseReason = null
                 };
 
                 DalAlert.AddAlert(alert);
-                Console.WriteLine($"alert for  target {targetId} {alert.AlertReason}");
-               
+                Logger.Info($"Alert created for target {targetId}: {alert.AlertReason}");
+
                 PersonService.UpdateUserType(targetId, "suspect");
             }
         }
 
-        public static void GetAllAlerts()
+
+
+
+
+        public static List<Alert> GetAllAlerts()
         {
-            DalAlert.GetAllAlerts();
+           return DalAlert.GetAllAlerts();
         }
 
-        public static void GetAlertById(int id)
+        public static Alert GetAlertById(int id)
         {
-            DalAlert.GetAlertById(id);
+            return DalAlert.GetAlertById(id);
         }
 
         public static void CloseAlert(int alertId, string closeReason)

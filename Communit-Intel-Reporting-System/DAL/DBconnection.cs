@@ -24,7 +24,7 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"[DB ERROR] Failed to connect: {ex.Message}");
+                Logger.Error($"[DB ERROR] Failed to connect: {ex.Message}");
                 throw;
             }
         }
@@ -35,7 +35,7 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
         public static void Disconnect(MySqlConnection conn)
         {
             conn.Close();
-            Console.WriteLine("connection closed");
+           Logger.Info("connection closed");
         }
         /// <summary>
         /// Parses the MySqlDataReader into a list of dictionaries.
@@ -64,7 +64,7 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
         }
 
         /// <summary>
-        /// Executes a SQL query that returns rows (e.g. SELECT) and parses the result into a list of dictionaries.
+        /// Executes a SQL query that returns rows  and parses the result into a list of dictionaries.
         /// Each dictionary represents a row with column name as key and column value as value.
         /// </summary>
         public static List<Dictionary<string, object>> Execute(string sql, MySqlConnection conn)

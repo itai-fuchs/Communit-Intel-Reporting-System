@@ -61,15 +61,16 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
         }
 
 
-        public static List<Report> GetAllReports()
+        public static List<Report> GetAllReportsByID(int id)
         {
+
             List<Report> reports = new List<Report>();
 
             try
             {
                 using (MySqlConnection conn = DBConnection.Connect())
                 {
-                    string sql = "SELECT * FROM reports";
+                    string sql = $"SELECT * FROM reports WHERE  target_id ={id}";
                     var rows = DBConnection.Execute(sql, conn);
 
                     foreach (var row in rows)

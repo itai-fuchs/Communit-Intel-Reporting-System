@@ -27,6 +27,7 @@ namespace Community_Intel_Reporting_System.Service_Layer
 
                 DalAlert.AddAlert(alert);
                 Logger.Info($"Alert created for target {targetId}: {alert.AlertReason}");
+                Console.WriteLine($"Alert created for target {targetId}: {alert.AlertReason}");
 
                 PersonService.UpdateUserType(targetId, "suspect");
             }
@@ -36,9 +37,9 @@ namespace Community_Intel_Reporting_System.Service_Layer
 
 
 
-        public static List<Alert> GetAllAlerts()
+        public static List<Alert> GetAllAlertsById(int targetId)
         {
-           return DalAlert.GetAllAlerts();
+           return DalAlert.GetAllAlertsById(targetId);
         }
 
         public static Alert GetAlertById(int id)

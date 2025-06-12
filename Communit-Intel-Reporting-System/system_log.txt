@@ -62,3 +62,53 @@
 [2025-06-12 15:34:09] [INFO] [INFO]New target added
 [2025-06-12 15:34:17] [INFO] Report added successfully.
 [2025-06-12 15:34:17] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:17:58] [ERROR] [SELECT BY SecretCode ERROR] Unable to connect to any of the specified MySQL hosts
+[2025-06-12 22:20:33] [ERROR] [SELECT BY SecretCode ERROR] Unable to connect to any of the specified MySQL hosts
+[2025-06-12 22:21:50] [ERROR] [SELECT BY SecretCode ERROR] Unable to connect to any of the specified MySQL hosts
+[2025-06-12 22:22:29] [ERROR] [SELECT BY SecretCode ERROR] Unable to connect to any of the specified MySQL hosts
+[2025-06-12 22:29:08] [ERROR] [SELECT BY SecretCode ERROR] Unable to connect to any of the specified MySQL hosts
+[2025-06-12 22:34:45] [INFO] Person added successfully.
+[2025-06-12 22:35:18] [INFO] Person added successfully.
+[2025-06-12 22:35:18] [INFO] [INFO]New target added
+[2025-06-12 22:35:26] [INFO] Report added successfully.
+[2025-06-12 22:35:26] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:35:40] [INFO] Report added successfully.
+[2025-06-12 22:35:40] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:35:53] [INFO] Report added successfully.
+[2025-06-12 22:35:53] [INFO] New alert created for person with ID 9
+[2025-06-12 22:35:53] [INFO] Alert created for target 9: Mentioned 3 times, 3 reports in last 15 minutes
+[2025-06-12 22:35:53] [INFO] User type for person with ID 9 updated to 'suspect'.
+[2025-06-12 22:35:53] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:37:55] [INFO] Report added successfully.
+[2025-06-12 22:37:55] [INFO] New alert created for person with ID 9
+[2025-06-12 22:37:55] [INFO] Alert created for target 9: Mentioned 4 times, 4 reports in last 15 minutes
+[2025-06-12 22:37:55] [INFO] User type for person with ID 9 updated to 'suspect'.
+[2025-06-12 22:37:55] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:38:00] [INFO] Person added successfully.
+[2025-06-12 22:38:01] [INFO] [INFO]New target added
+[2025-06-12 22:38:01] [INFO] Report added successfully.
+[2025-06-12 22:38:01] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:38:08] [INFO] Person added successfully.
+[2025-06-12 22:38:08] [INFO] [INFO]New target added
+[2025-06-12 22:38:09] [INFO] Report added successfully.
+[2025-06-12 22:38:09] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:38:13] [INFO] Person added successfully.
+[2025-06-12 22:38:13] [INFO] [INFO]New target added
+[2025-06-12 22:38:13] [INFO] Report added successfully.
+[2025-06-12 22:38:13] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:38:17] [INFO] Person added successfully.
+[2025-06-12 22:38:17] [INFO] [INFO]New target added
+[2025-06-12 22:38:17] [INFO] Report added successfully.
+[2025-06-12 22:38:17] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:38:21] [INFO] Person added successfully.
+[2025-06-12 22:38:21] [INFO] [INFO]New target added
+[2025-06-12 22:38:22] [INFO] Report added successfully.
+[2025-06-12 22:38:22] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:38:24] [INFO] Report added successfully.
+[2025-06-12 22:38:24] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:38:46] [ERROR] [ADD ERROR] Duplicate entry '1' for key 'secret_code'
+[2025-06-12 22:40:32] [INFO] Report added successfully.
+[2025-06-12 22:40:32] [INFO] User type for person with ID 8 updated to 'agent'.
+[2025-06-12 22:40:32] [INFO] [INFO]Report submitted successfully.
+[2025-06-12 22:56:16] [INFO] [INFO] GET ALL ALERT
+[2025-06-12 22:56:18] [INFO] [INFO] GET ALL ALERT

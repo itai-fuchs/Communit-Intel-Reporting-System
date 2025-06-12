@@ -90,13 +90,13 @@ namespace Community_Intel_Reporting_System.Service_LayerQL
             }
         }
 
-        public static List<Alert> GetAllAlerts()
+        public static List<Alert> GetAllAlertsById(int targetId)
         {
             try
             {
                 using (MySqlConnection conn = DBConnection.Connect())
                 {
-                    string sql = "SELECT * FROM alerts";
+                    string sql = $"SELECT * FROM alerts WHERE target_id ={targetId}" ;
                     var rows = DBConnection.Execute(sql, conn);
 
                     List<Alert> alerts = new List<Alert>();

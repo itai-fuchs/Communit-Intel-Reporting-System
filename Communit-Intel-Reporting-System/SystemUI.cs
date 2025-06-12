@@ -15,7 +15,7 @@ namespace Community_Intel_Reporting_System.UI
         {
             while (true)
             {
-                Console.WriteLine("\n--- Welcome to the  MALSHINON System ---");
+               
                 Console.WriteLine("1. Login");
                 Console.WriteLine("2. register");
                 Console.WriteLine("0. Exit");
@@ -128,7 +128,7 @@ namespace Community_Intel_Reporting_System.UI
             {
                 Console.WriteLine("\n--- Agent Menu ---");
                 Console.WriteLine("1. Submit Report");
-                Console.WriteLine("2. View All Reports");
+                Console.WriteLine("2. View All ReportsB by id");
                 Console.WriteLine("3. View All Alerts");
                 Console.WriteLine("4. Close Alert");
                 Console.WriteLine("0. Logout");
@@ -140,10 +140,14 @@ namespace Community_Intel_Reporting_System.UI
                         UISubmitReport(userId);
                         break;
                     case "2":
-                        ViewAllReports();
+                        Console.WriteLine("target id: ");
+                        int targetId =int.Parse(Console.ReadLine());
+                        UIViewAllReports(targetId);
                         break;
                     case "3":
-                        ViewAllAlerts();
+                        Console.WriteLine("target id: ");
+                        targetId = int.Parse(Console.ReadLine());
+                        UIViewAllAlertsbYId(targetId);
                         break;
                     case "4":
                         UICloseAlert();
@@ -199,9 +203,9 @@ namespace Community_Intel_Reporting_System.UI
             }
         }
 
-        private void ViewAllReports()
+        private void UIViewAllReports(int targetid)
         {
-            var reports = DalReport.GetAllReports();
+            var reports = DalReport.GetAllReportsByID(targetid);
             Console.WriteLine("\n--- Reports ---");
             foreach (var r in reports)
             {
@@ -210,9 +214,9 @@ namespace Community_Intel_Reporting_System.UI
         }
 
     
-        private void ViewAllAlerts()
+        private void UIViewAllAlertsbYId(int targetId)
         {
-            var alerts = DalAlert.GetAllAlerts();
+            var alerts = DalAlert.GetAllAlertsById(targetId);
             Console.WriteLine("\n--- Alerts ---");
             foreach (var a in alerts)
             {
